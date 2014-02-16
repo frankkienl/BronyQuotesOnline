@@ -35,7 +35,7 @@ foreach ($originalLines as $line) {
         $temp = str_getcsv($line);
         $name = $temp[2];
         $mp3 = substr($temp[3], 2, -1);
-        if (!contains($mp3, "mp3")){
+        if (!contains($mp3, "mp3")) {
             echo "<!-- error parsing line: $line //-->\n";
         } else {
             $sounds[$name] = $mp3;
@@ -47,9 +47,9 @@ foreach ($originalLines as $line) {
     <head>
         <title>Brony Quotes</title>
         <script type="text/javascript">
-            function doSound(filename){
+            function doSound(filename) {
                 div_audio = document.getElementById("div_audio");
-                div_audio.innerHTML = "<audio controls autoplay><source src=\"assets/<?php echo $pony;?>/"+filename+"\" type=\"audio/mpeg\"></audio>";
+                div_audio.innerHTML = "<audio controls autoplay><source src=\"assets/<?php echo $pony; ?>/" + filename + "\" type=\"audio/mpeg\"></audio>";
             }
         </script>
     </head>
@@ -59,13 +59,13 @@ foreach ($originalLines as $line) {
             <?php
             foreach ($sounds as $key => $value) {
                 echo "<div class=\"div_button\">\n";
-                echo "<button onClick=\"doSound('$value')\">$key</button>\n";
+                echo "<button onClick=\"doSound('" . str_replace("'", "\\x27", $value) . "')\">$key</button>\n";
                 echo "</div>\n";
             }
             ?>
         </div>
         <div id="div_audio">
-            
+
         </div>
     </body>
 </html>
